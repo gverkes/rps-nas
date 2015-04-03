@@ -2,16 +2,53 @@ package nl.mrprog.govert.week1;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 
+import nl.mrprog.govert.week1.RPS;
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements OnClickListener{
+    private static final String TAG = "MainActivity";
+    TextView lblAICount, lblPlayerCount;
+    Button btnRock, btnPaper, btnScissor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        lblAICount = (TextView) findViewById(R.id.lblAICount);
+        lblPlayerCount = (TextView) findViewById(R.id.lblPlayerCount);
+
+        btnRock = (Button) findViewById(R.id.btnRock);
+        btnPaper = (Button) findViewById(R.id.btnPaper);
+        btnScissor = (Button) findViewById(R.id.btnScissor);
+
+        btnRock.setOnClickListener(this);
+        btnPaper.setOnClickListener(this);
+        btnScissor.setOnClickListener(this);
+    }
+
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnRock:
+                Log.v(TAG, Integer.toString(RPS.generateOuputAI()));
+                Log.v(TAG, "Rock");
+                break;
+            case R.id.btnPaper:
+                Log.v(TAG, "Paper");
+                break;
+            case R.id.btnScissor:
+                Log.v(TAG, "Scissor");
+                break;
+
+        }
     }
 
 
