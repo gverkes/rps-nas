@@ -17,6 +17,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     TextView lblAICount, lblPlayerCount;
     Button btnRock, btnPaper, btnScissor;
 
+    // Counters for winnings
+    int AICount = 0, playerCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +38,30 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     }
 
     public void onClick(View v) {
+        int winner = RPS.DRAW;
         switch (v.getId()) {
+            // determine winner
             case R.id.btnRock:
-                Log.v(TAG, Integer.toString(RPS.generateOuputAI()));
+                winner = RPS.getWinner(RPS.ROCK, RPS.generateOuputAI());
                 Log.v(TAG, "Rock");
                 break;
             case R.id.btnPaper:
+                winner = RPS.getWinner(RPS.PAPER, RPS.generateOuputAI());
                 Log.v(TAG, "Paper");
                 break;
             case R.id.btnScissor:
+                winner = RPS.getWinner(RPS.SCISSOR, RPS.generateOuputAI());
                 Log.v(TAG, "Scissor");
                 break;
+
+        }
+        if (winner == RPS.PLAYER) {
+            playerCount++;
+            lblPlayerCount.setText(Integer.toString(playerCount));
+        } else if (winner == RPS.AI) {
+            AICount++;
+            lblPlayerCount.setText(Integer.toString(AICount));
+        } else if (winner == RPS.DRAW) {
 
         }
     }
