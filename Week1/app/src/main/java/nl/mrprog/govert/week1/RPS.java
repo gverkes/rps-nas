@@ -4,7 +4,14 @@ import java.util.Random;
 /**
  * Created by govert on 4/3/15.
  */
+
+
+
 public class RPS {
+    public static final String MSG_PLAYER_WIN = "You Won!";
+    public static final String MSG_AI_WIN = "You Lost!";
+    public static final String MSG_DRAW = "Draw!";
+
     public static final int ROCK = 1;
     public static final int PAPER = 2;
     public static final int SCISSOR = 3;
@@ -19,31 +26,26 @@ public class RPS {
     }
 
     public static int getWinner(int playerChoice, int AIChoice) {
+        int winner = DRAW;
         switch(playerChoice) {
             case ROCK:
-                if (AIChoice == ROCK)
-                    return DRAW;
-                else if (AIChoice == PAPER)
-                    return AI;
-                else
-                    return PLAYER;
+                if (AIChoice == PAPER)
+                    winner = AI;
+                else if (AIChoice == SCISSOR)
+                    winner = PLAYER;
                 break;
             case PAPER:
                 if (AIChoice == ROCK)
-                    return PLAYER;
-                else if (AIChoice == PAPER)
-                    return DRAW;
-                else
-                    return AI;
+                    winner = PLAYER;
+                else if (AIChoice == SCISSOR)
+                    winner = AI;
                 break;
             case SCISSOR:
                 if (AIChoice == ROCK)
-                    return AI;
+                    winner = AI;
                 else if (AIChoice == PAPER)
-                    return PLAYER;
-                else
-                    return DRAW;
-                break;
+                    winner = PLAYER;
         }
+        return winner;
     }
 }
