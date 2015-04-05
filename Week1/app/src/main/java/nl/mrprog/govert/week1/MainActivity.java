@@ -1,13 +1,13 @@
 package nl.mrprog.govert.week1;
 
-import android.media.Image;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,15 +16,20 @@ import android.widget.TextView;
 public class MainActivity extends ActionBarActivity implements OnClickListener{
     private static final String TAG = "MainActivity";
     TextView lblAICount, lblPlayerCount, lblWinner;
-    Button btnRock, btnPaper, btnScissor;
     ImageView imgAI, imgPlayer;
+    Button btnRock, btnPaper, btnScissor;
 
     // Counters for winnings
     int AICount = 0, playerCount = 0;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         imgAI = (ImageView) findViewById(R.id.imgAI);
@@ -80,7 +85,6 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
             lblWinner.setText(RPS.MSG_DRAW);
         }
     }
-
 
     public void choosePicture(int player, int choice) {
         lblAICount = (TextView) findViewById(R.id.lblAICount);
